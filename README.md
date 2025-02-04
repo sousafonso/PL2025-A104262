@@ -4,9 +4,9 @@
 
 Olá!
 
-Bem-vindo ao repositório pessoal da UC PL2025. Este espaço foi criado para armazenar os TP que serão realizados ao longo das primeiras 8 semanas da disciplina. A cada semana, um novo TPC será disponibilizado durante as aulas teóricas e deverá ser entregue antes do lançamento do próximo.
+Bem-vindo ao repositório pessoal da UC de Processamento de Linguagens. Este espaço foi criado para armazenar os TPCs que serão realizados ao longo das primeiras 8 semanas da disciplina. A cada semana, um novo TPC será disponibilizado durante as aulas teóricas e deverá ser entregue antes do lançamento do próximo.
 
-Cada TP está organizado numa pasta específica, nomeada como `TPC1`, `TPC2`, etc., contendo:
+Cada TPC está organizado numa pasta específica, nomeada como `TPC1`, `TPC2`, etc., contendo:
 - **Todos os ficheiros** relativos à realização do TPC.
 - **Um manifesto** (mini-relatório) em Markdown, denominado `README.md`, com a seguinte estrutura:
   - Título

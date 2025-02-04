@@ -1,6 +1,6 @@
 # PL2025-A10262
 
-![Foto do Autor](./caminho/para/sua/foto.jpg)
+![Foto do Autor](./FOTO.jpg)
 
 Olá!
 

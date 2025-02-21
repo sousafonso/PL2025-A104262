@@ -31,7 +31,7 @@ Cada linha do conjunto de dados é processada para identificar o período da obr
 Outro dicionário mapeia cada período para uma lista dos títulos das obras. Após a agregação, estas listas são ordenadas alfabeticamente.
 
 5. **Exibição dos Resultados:**  
-Os resultados são gravados num ficheiro de saída (`outputs.txt`) e também apresentados no terminal, seguindo o seguinte formato:
+Os resultados são apresentados no terminal, seguindo o seguinte formato:
 
 - Lista ordenada dos compositores;
 - Distribuição das obras por período;

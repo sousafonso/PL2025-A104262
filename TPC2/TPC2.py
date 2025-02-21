@@ -1,52 +1,79 @@
-# Caminho do ficheiro CSV
-file_path = "./TPC2/obras.csv"
+import re
+import os
 
-# Ler todas as linhas do ficheiro
-with open(file_path, "r", encoding="utf-8") as file:
-    lines = file.readlines()
+# padrão regex para extrair os campos do CSV
+regex_pattern = re.compile(r'([^;]+);("(?:[^"]*(?:"[^"]*)*)"|[^;]+);([^;]+);([^;]+);([^;]+);([^;]*)\n?')
 
-# O cabeçalho está contido na primeira linha (separado por ponto-e-vírgula)
-header = lines[0].strip().split(";")
-data = [line.strip().split(";") for line in lines[1:] if line.strip() and len(line.strip().split(";")) >= len(header)]
+# Conjunto para armazenar os compositores únicos
+compositores_set = set()
 
-# Obter os índices das colunas relevantes
-idx_nome = header.index("nome")
-idx_compositor = header.index("compositor")
-idx_periodo = header.index("periodo")
+# Dicionários para armazenar a contagem e os títulos por período
+contagem_periodo = {}
+titulos_por_periodo = {}
 
-# 1. Lista ordenada alfabeticamente dos compositores musicais
-compositores = sorted({row[idx_compositor] for row in data})
+# Abre o arquivo CSV e ignora o cabeçalho
+with open("./TPC2/obras.csv", 'r', encoding='utf-8') as file_in:
+    file_in.readline()  # Ignora o cabeçalho
+    acumulador = ""
+    
+    for line in file_in:
+        acumulador += line
+        resultado = re.match(regex_pattern, acumulador)
+        if resultado:
+            titulo = resultado.group(1)
+            periodo = resultado.group(4)
+            compositor = resultado.group(5)
+            
+            # Adiciona o compositor ao conjunto
+            compositores_set.add(compositor)
+            
+            # Atualiza a contagem de obras por período
+            if periodo in contagem_periodo:
+                contagem_periodo[periodo] += 1
+            else:
+                contagem_periodo[periodo] = 1
+            
+            # Agrupa os títulos das obras por período
+            if periodo not in titulos_por_periodo:
+                titulos_por_periodo[periodo] = []
+            titulos_por_periodo[periodo].append(titulo)
+            
+            # Reseta o acumulador para a próxima linha(s)
+            acumulador = ""
 
-# 2. Distribuição das obras por período (quantas obras em cada período)
-distribuicao_obras = {}
-for row in data:
-    periodo = row[idx_periodo]
-    distribuicao_obras[periodo] = distribuicao_obras.get(periodo, 0) + 1
+# Ordena os compositores e os títulos
+compositores_ordenados = sorted(compositores_set)
+for per in titulos_por_periodo:
+    titulos_por_periodo[per].sort()
 
-# 3. Dicionário com, para cada período, uma lista alfabética dos títulos das obras
-obras_por_periodo = {}
-for row in data:
-    periodo = row[idx_periodo]
-    obra = row[idx_nome]
-    if periodo not in obras_por_periodo:
-        obras_por_periodo[periodo] = []
-    obras_por_periodo[periodo].append(obra)
+# Se o arquivo de saída já existir, remove-o
+if os.path.exists("outputs.txt"):
+    os.remove("outputs.txt")
 
-# Ordenar alfabeticamente os títulos em cada período
-for periodo in obras_por_periodo:
-    obras_por_periodo[periodo] = sorted(obras_por_periodo[periodo])
+# Grava os resultados no arquivo e os exibe no console
+with open("outputs.txt", 'a', encoding='utf-8') as out_file:
+    # 1. Lista de compositores ordenada
+    out_file.write("1. Lista ordenada alfabeticamente dos compositores:\n")
+    out_file.write(str(compositores_ordenados) + "\n\n")
+    
+    # 2. Distribuição das obras por período
+    out_file.write("2. Distribuição das obras por período:\n")
+    for per in sorted(contagem_periodo.keys()):
+        out_file.write(f"{per}: {contagem_periodo[per]} obras\n")
+    out_file.write("\n")
+    
+    # 3. Dicionário de títulos por período com listas ordenadas
+    out_file.write("3. Dicionário por período com lista alfabética dos títulos:\n")
+    for per in sorted(titulos_por_periodo.keys()):
+        out_file.write(f"{per}: {titulos_por_periodo[per]}\n")
 
-# Exibir os resultados
-print("Lista ordenada dos compositores:")
-for compositor in compositores:
-    print(" -", compositor)
+print("1. Lista ordenada alfabeticamente dos compositores:")
+print(compositores_ordenados)
 
-print("\nDistribuição das obras por período:")
-for periodo, quantidade in distribuicao_obras.items():
-    print(f" {periodo}: {quantidade} obra(s)")
+print("\n2. Distribuição das obras por período:")
+for per in sorted(contagem_periodo.keys()):
+    print(f"{per}: {contagem_periodo[per]} obras")
 
-print("\nObras por período (títulos ordenados alfabeticamente):")
-for periodo, obras in obras_por_periodo.items():
-    print(f"\nPeríodo: {periodo}")
-    for obra in obras:
-        print("   -", obra)
+print("\n3. Dicionário por período com lista alfabética dos títulos:")
+for per in sorted(titulos_por_periodo.keys()):
+    print(f"{per}: {titulos_por_periodo[per]}")

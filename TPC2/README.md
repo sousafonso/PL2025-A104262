@@ -38,3 +38,8 @@ Os resultados são apresentados no terminal, seguindo o seguinte formato:
 - Dicionário com os títulos das obras por período (ordenados alfabeticamente).
 
 Esta implementação satisfaz os requisitos do TPC de forma simples, robusta e eficiente, utilizando expressões regulares para o processamento do CSV sem dependências externas.
+
+## Autoria
+
+- **Nome:** Afonso Sousa
+- **ID:** A104262

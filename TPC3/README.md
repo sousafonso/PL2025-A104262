@@ -101,3 +101,7 @@ O objetivo é converter texto em Markdown para HTML, seguindo as regras básicas
      - Entrada: `![imagem](http://exemplo.com)`
      - Saída: `<img src="http://exemplo.com" alt="imagem"/>`
 
+## Autoria
+
+- **Nome:** Afonso Sousa
+- **ID:** A104262

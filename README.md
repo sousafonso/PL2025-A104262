@@ -19,6 +19,7 @@ Este repositório serve como o repositório principal para a UC, onde serão arm
 
 ---
 
-**Autor:**  
-Nome: Afonso Sousa 
-Número: A104262  
+## Autor
+
+- **Nome:** Afonso Sousa
+- **ID:** A104262

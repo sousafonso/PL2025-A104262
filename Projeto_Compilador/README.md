@@ -101,7 +101,7 @@ Da gramática implementada queremos destacar alguns casos particulares:
 
 Para definir listas de valores tivemos atenção de aplicar recursividade à esquerda pelo facto do yacc ser um parser LALR.
 
-Como exemplo demosntramos a declaração das produuções var_declarations e var_declaration que aplicam esta estratégia; as restantes produções que involvem listas (identifiers_list, args_list, etc.) seguem a mesma lógica
+Como exemplo demonstramos a declaração das produções var_declarations e var_declaration que aplicam esta estratégia; as restantes produções que involvem listas (identifiers_list, args_list, etc.) seguem a mesma lógica
 ```
 <var_declarations> -> <var_declarations> <var_declaration>
                      | <var_declaration>
@@ -134,7 +134,7 @@ Esta regra define o ciclo for, que permite iterar através de um intervalo de va
 `IDENTIFIER`: identifica a variável de controlo do ciclo;
 `ASSIGN`: operador de atribuição para inicializar a variável de controlo;
 `expression`: expressão que define o valor inicial da variável de controlo;
-`to_or_downto`: é uma produção auxiliar que determina a direção (TO para incrementeo ou DOWNTO para decremento);
+`to_or_downto`: é uma produção auxiliar que determina a direção (TO para incremento ou DOWNTO para decremento);
 `DO`: indica o início do bloco de comandos a serem executados no ciclo;
 `command_list`: lista de comandos a serem executados em cada iteração do ciclo.
 

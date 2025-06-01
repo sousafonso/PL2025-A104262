@@ -4,7 +4,7 @@
 
 <h1 align="center">Compilador para Pascal Standard</h1>
 
-## Projeto de Processamento de Linguagens
+## Projeto de Processamento de Linguagens - Grupo 29
 
 <p align="left">
   <strong>Membros do Grupo</strong><br>

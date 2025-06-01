@@ -1,0 +1,91 @@
+<program> -> "PROGRAM" <identifier> ";" <vars> <command_list> "."
+
+<vars> -> "VAR" <var_declarations>
+         | ε
+
+<var_declarations> -> <var_declarations> <var_declaration>
+                     | <var_declaration>
+
+<var_declaration> -> <identifiers_list> ":" <type> ";"
+
+<identifiers_list> -> <identifiers_list> "," <identifier>
+                     | <identifier>
+
+<type> -> <simple_type>
+         | <array_type>
+
+<simple_type> -> "INTEGER" | "REAL" | "STRING" | "CHAR" | "BOOLEAN"
+
+<array_type> -> "ARRAY" "[" <range> "]" "OF" <simple_type>
+
+<range> -> <int_lit> ".." <int_lit>
+
+<command_list> -> "BEGIN" <command_list_opt> "END"
+                 | <command>
+
+<command_list_opt> -> <command_list_body>
+                     | <command_list_body> ";"
+
+<command_list_body> -> <command_list_body> ";" <command>
+                      | <command>
+
+<command> -> <function_call>
+            | <assignment>
+            | <if>
+            | <while>
+            | <for>
+
+<function_call> -> <identifier> "(" <args_list> ")"
+
+<args_list> -> <args_list> "," <expressionBool>
+              | <expressionBool>
+              | ε
+
+<argument> -> <literal>
+             | <var>
+
+<literal> -> <string_lit>
+            | <char_lit>
+            | <int_lit>
+            | <real_lit>
+            | "TRUE"
+            | "FALSE"
+
+<var> -> <identifier>
+        | <identifier> "[" <expression> "]"
+
+<if> -> "IF" <expressionBool> "THEN" <command_list> <else>
+
+<else> -> "ELSE" <command_list>
+         | ε
+
+<while> -> "WHILE" <expressionBool> "DO" <command_list>
+
+<for> -> "FOR" <identifier> ":=" <expression> <to_or_downto> <expression> "DO" <command_list>
+
+<to_or_downto> -> "TO"
+                 | "DOWNTO"
+
+<expressionBool> -> <expression>
+                   | <expression> <opRel> <expression>
+
+<opRel> -> "=" | "<>" | "<" | "<=" | ">" | ">="
+
+<expression> -> <term>
+               | <expression> <opAd> <term>
+
+<opAd> -> "+" | "-" | "AND"
+
+<term> -> <factor>
+         | <term> <opMul> <factor>
+
+<opMul> -> "*" | "/" | "DIV" | "MOD" | "OR"
+
+<factor> -> <argument>
+           | "(" <expressionBool> ")"
+           | <function_call>
+
+<assignment> -> <identifier> ":=" <expression>
+               | <identifier> "[" <expression> "]" ":=" <expression>
+
+<empty> -> ε
